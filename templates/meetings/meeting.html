@@ -1,0 +1,57 @@
+{% extends "../base.html" %}
+
+{% block content %}
+    <div class="section">
+        <div class="container-fluid">
+            <div class="columns">
+                <div class="column is-one-quarter">
+                    <h1 class="title is-2">{{ meeting.subject }}</h1>
+                    {% if meeting.is_anonymous %}
+                        <a href="{{ guest_link }}" target="_blank">Guest Link</a>
+                {% endif %}
+                    <h3 class="title is-4">Attendees</h3>
+                    <div class="box">
+                        {% for attendee in attendees %}
+                        <div class="media">
+                        <div class="media-content">
+                            <strong>{{ attendee.first_name }} {{ attendee.last_name }}</strong> <small>@{{ attendee.username }}</small>
+                        </div>
+                        </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="column is-three-quarters" id="mount">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    {% verbatim %}
+    <script>
+        function initialise() {
+            fetch(document.location + '/data')
+                .then(response => {
+                    if (response.status === 200) {
+                        response.json().then(settings => {
+                            const api = new JitsiMeetExternalAPI(settings.domain,
+                                {
+                                    parentNode: document.getElementById('mount'),
+                                    roomName: settings.roomName,
+                                    jwt: settings.jwt,
+                                    height: 700
+                                });
+                            api.executeCommand('subject', settings.subject);
+                        });
+                    } else {
+                        document.getElementById('mount').innerText = 'Unable to load';
+                    }
+                });
+        }
+
+    </script>
+    {% endverbatim %}
+    <script src='https://meet.jit.si/external_api.js' onload="initialise()"></script>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "../base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-one-third">
+                <div class="box">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="field">
+                        </div>
+                        {{ form }}
+                        <button type="submit" class="is-primary">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

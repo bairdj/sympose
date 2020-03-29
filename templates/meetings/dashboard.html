@@ -1,0 +1,42 @@
+{% extends "../base.html" %}
+
+{% block content %}
+    <section class="section">
+        <div class="container">
+            <h3 class="title">Your Meetings</h3>
+            {% if upcoming.count > 0 %}
+                <div class="box">
+                    {% for attending in upcoming %}
+                        <div class="media">
+                            <div class="media-left">
+                                <div class="is-size-4 has-text-centered">
+                                    {{ attending.meeting.start_time | date:"H:i" }}
+                                </div>
+                                <div class="is-size-6 has-text-centered">
+                                    {{ attending.meeting.start_time | date:"j M" }}
+                                </div>
+
+                            </div>
+                            <div class="media-content">
+                                <div class="is-size-5">{{ attending.meeting.subject }}</div>
+                                Created by {{ attending.meeting.owner.username }}
+                                <br>
+
+                            </div>
+                            <div class="media-right">
+                                <a href="{% url "meeting" attending.meeting.room_id %}" class="button">Join</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="message">
+                    <div class="message-body">
+                        You have no upcoming meetings
+                    </div>
+                </div>
+
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}
