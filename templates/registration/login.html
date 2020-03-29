@@ -7,10 +7,8 @@
                 <div class="box">
                     <form method="post">
                         {% csrf_token %}
-                        <div class="field">
-                        </div>
-                        {{ form }}
-                        <button type="submit" class="is-primary">Login</button>
+                        {{ form.as_p }}
+                        <button type="submit" class="is-primary button">Login</button>
                     </form>
                 </div>
             </div>
