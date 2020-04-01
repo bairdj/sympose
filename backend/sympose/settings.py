@@ -122,7 +122,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # The domain where your Jitsi instance is hosted
-JITSI_DOMAIN = ''
+JITSI_DOMAIN = 'meet.jbaird.me'
 # Needs to match these settings from https://github.com/jitsi/docker-jitsi-meet
 # JWT_ACCEPTED_ISSUERS
 JWT_ISS = 'sympose'
