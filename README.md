@@ -38,6 +38,10 @@ python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
 ```
+You should now be able to access the administration panel.
+You should consider how you want to use permissions for users in your application. By default, all users will be able to access meetings.
+Only users who have appropriate permissions for the Meeting model will be able to create and assign users to meetings.
+You could assign this permission through the use of groups or individual user permissions.
 
 If deploying to production, see these [instructions](https://docs.djangoproject.com/en/3.0/howto/deployment/).
 ### Built using
