@@ -18,10 +18,28 @@ without having to configure LDAP. Sympose uses room-based JWTs to authorise user
 You will need to have your own Jitsi Meet instance. The easiest way to get started is to use
 [Jitsi Meet on Docker](https://github.com/jitsi/docker-jitsi-meet).
 
-Then just install Django as normal and change the relevant JITSI_ settings in settings.py.
-You will need to set JITSI_DOMAIN. The others can be left as default but you'll probably want to set a proper secret.
-These settings need to match the JWT_ environment variables in Docker.
+Creating a [Python virtual environment](https://docs.python.org/3/library/venv.html) to run Sympose is recommended.
+Once that is created, you can get started with
 
+```
+git clone https://github.com/bairdj/sympose.git
+cd sympose
+pip install -r requirements.txt
+```
+
+You then need to update settings in `sympose/settings.py`.
+You will need to define your database connection (see Django docs) and all of the settings with the JITSI_ prefix.
+Setting `JITSI_DOMAIN` is mandatory. The other settings can be left as default but you will probably want to change the secret.
+These values should correspond with those set in your Docker/Jitsi configuration.
+
+Once configured:
+```
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
+
+If deploying to production, see these [instructions](https://docs.djangoproject.com/en/3.0/howto/deployment/).
 ### Built using
 * Django
 * Bulma
