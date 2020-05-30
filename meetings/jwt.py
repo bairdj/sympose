@@ -7,7 +7,7 @@ def generate(room, user=None):
         "iss": settings.JWT_ISS,
         "sub": settings.JWT_SUB,
         "aud": settings.JWT_AUD,
-        "room": room
+        "room": str(room)
     }
     if user is not None:
         payload["context"] = {
